@@ -41,12 +41,12 @@ Servers may wish to address the following activities as part of an import proces
 	- `type` (string, required)
 	- Parameters depending on type:
 
-	| type   | parameters |
-	|--------|------------|
-	|`https` | - `contentEncoding` (array of strings, optional) |
-	|`aws-s3`| |
-	|`gcp-bucket`| |
-	|`azure-blob`| |
+		| type   | parameters |
+		|--------|------------|
+		|`https` | - `contentEncoding` (array of strings, optional) |
+		|`aws-s3`| |
+		|`gcp-bucket`| |
+		|`azure-blob`| |
 
 ```
 NOTES: @nikolai: I would introduce mode: batch | transaction - which means the same as in FHIR transaction - with batch mode each loaded file will be imported without waiting for others ?!
@@ -182,7 +182,7 @@ NOTE: need to decide what time transactionTime represents
 200 OK
 Content-Type: application/json
 ```
-```json
+```
 {
 	"transactionTime": "[instant]",
 	"request": "[base]/$import", // do we need more context? 
