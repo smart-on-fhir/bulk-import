@@ -3,7 +3,7 @@
 ## Overview
 There are diverse use cases for a bulk-level FHIR data import capability -- including server backup/restore, migration of data between FHIR servers and the aggregation of data from multiple sources to create a combined data set. For some use cases, a single batch import suffices; for others, the ability to bring in incremental data over time is required.
 
-This implementation guide compliments the [FHIR Bulk Data Export Operation IG](http://build.fhir.org/ig/HL7/bulk-data/export/index.html).
+This implementation guide complements the [FHIR Bulk Data Export Operation IG](http://build.fhir.org/ig/HL7/bulk-data/export/index.html).
 
 Servers may wish to address the following activities as part of an import process, however, standardization of them is out of scope for the initial release of this implementation guide:
 - Incorporation of incremental changes
@@ -15,7 +15,7 @@ Servers may wish to address the following activities as part of an import proces
 
 ### Bulk Data Import Kick-Off Request
 
-`POST [fhir base]/$export`
+`POST [fhir base]/$import`
 
 #### Headers
 
@@ -27,7 +27,7 @@ Servers may wish to address the following activities as part of an import proces
 
 - `inputFormat` (string, required)
 
-	Servers SHALL support [Newline Delimited JSON](http://ndjson.org) with a format type of `application/fhir+ndjson` but MAY choose to support additional input formats. 
+	Servers SHALL support [Newline Delimited JSON](http://ndjson.org) with a format type of `application/fhir+ndjson` but MAY choose to support additional input formats.
 
 - `inputSource` (url, required)
 
@@ -90,7 +90,7 @@ If a server wants to prevent a client from beginning a new import before an in-p
 ---
 ### Bulk Data Import Delete Request
 
-After a bulk data import request has been started, a client MAY send a DELETE request to the URL provided in the ```Content-Location``` header to cancel the request.    
+After a bulk data import request has been started, a client MAY send a DELETE request to the URL provided in the ```Content-Location``` header to cancel the request.
 
 #### Endpoint
 
@@ -109,7 +109,7 @@ After a bulk data import request has been started, a client MAY send a DELETE re
 ---
 ### Bulk Data Import Status Request
 
-After a bulk data import request has been started, the client MAY poll the status URL provided in the ```Content-Location``` header.  
+After a bulk data import request has been started, the client MAY poll the status URL provided in the ```Content-Location``` header.
 
 Clients SHOULD follow an [exponential backoff](https://en.wikipedia.org/wiki/Exponential_backoff) approach when polling for status. Servers SHOULD supply a [Retry-After header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After) with a http date or a delay time in seconds. When provided, clients SHOULD use this information to inform the timing of future polling requests. Servers SHOULD keep an accounting of status queries received from a given client, and if a client is polling too frequently, the server SHOULD respond with a `429 Too Many Requests` status code in addition to a Retry-After header, and optionally a FHIR OperationOutcome resource with further explanation.  If excessively frequent status queries persist, the server MAY return a `429 Too Many Requests` status code and terminate the session. Other standard HTTP `4XX` as well as `5XX` status codes may be used to identify errors as mentioned.
 
@@ -121,7 +121,7 @@ When requesting status, the client SHOULD use an ```Accept``` header indicating 
 - Optionally, the server MAY return an ```X-Progress``` header with a text description of the status of the request that's less than 100 characters. The format of this description is at the server's discretion and may be a percentage complete value, or a more general status such as "in progress". The client MAY parse the description, display it to the user, or log it.
 
 ```
-NOTES (May Connectathon): 
+NOTES (May Connectathon):
 
 Consider more details in interim status response, e.g. # resources processed, or failed, or % of total file bytes processed, # resources already available / visible to clients… e.g., structure may help, but may also vary across servers depending on architecture.
 
@@ -131,7 +131,7 @@ There's some Task-y stuff about this. Or of course Parameters...
 
 Consider Parameters[] rather than an ad-hoc JSON payload here.
 
-Currently there's no status in this message or, e.g.,  a set of flags for the server to indicate things like "it's okay to delete this input file now, or okay to revoke server's access now." 
+Currently there's no status in this message or, e.g.,  a set of flags for the server to indicate things like "it's okay to delete this input file now, or okay to revoke server's access now."
 ```
 
 #### Response - Error Status
@@ -233,8 +233,8 @@ By default, client-supplied IDs should be preserved when importing resources. If
 
 #### Validation and referential integrity
 
-Servers MAY disable referential integrity checks and profile validation checks during a bulk import, and may report any issues in the "error" array of the import results. 
+Servers MAY disable referential integrity checks and profile validation checks during a bulk import, and may report any issues in the "error" array of the import results.
 
 Servers MAY choose to tolerate some number of errors (e.g., invalid entries in an ndjson file) without aborting the entire import operation. However, if a server decides to abort the entire import operation because of a fatal error, or because an error tolerance is exceeded, then the import response should include a "count" of 0 for every output entry, and any error or warning information should be conveyed in the "error" array.
 
-When a server is importing data into a live fire store, it may not be able to roll back a partial import if a fatal error is encountered (e.g., if an input file is no longer available). 
+When a server is importing data into a live FHIR store, it may not be able to roll back a partial import if a fatal error is encountered (e.g., if an input file is no longer available).
