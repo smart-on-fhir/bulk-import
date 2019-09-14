@@ -113,7 +113,7 @@ After a bulk data import request has been started, the client MAY poll the statu
 
 Clients SHOULD follow an [exponential backoff](https://en.wikipedia.org/wiki/Exponential_backoff) approach when polling for status. Servers SHOULD supply a [Retry-After header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After) with a http date or a delay time in seconds. When provided, clients SHOULD use this information to inform the timing of future polling requests. Servers SHOULD keep an accounting of status queries received from a given client, and if a client is polling too frequently, the server SHOULD respond with a `429 Too Many Requests` status code in addition to a Retry-After header, and optionally a FHIR OperationOutcome resource with further explanation.  If excessively frequent status queries persist, the server MAY return a `429 Too Many Requests` status code and terminate the session. Other standard HTTP `4XX` as well as `5XX` status codes may be used to identify errors as mentioned.
 
-When requesting status, the client SHOULD use an ```Accept``` header indicating a content type of  ```application/json```. In the case that errors prevent the export from completing, the server SHOULD respond with a FHIR OperationOutcome resource in JSON format.
+When requesting status, the client SHOULD use an ```Accept``` header indicating a content type of  ```application/json```. In the case that errors prevent the import from completing, the server SHOULD respond with a FHIR OperationOutcome resource in JSON format.
 
 #### Response - In-Progress Status
 
