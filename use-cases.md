@@ -6,4 +6,4 @@ I have a research dataset containing approximately 500,000,000 resources produce
 
 ## Patient history import
 
-[Castor EDC](https://www.castoredc.com/) is importing patient data from subjects included in a research study from the EPD via a FHIR endpoint. This includes both patient data from when the study is under way, but can also amount to large volumes of historic patient data. Currently these are retrieved via batch-bundles, which suffices for single-patient updates, but possibly the bulk import could be used for larger scale data exchanges, for example when importing data for a large retrospective cohort or registry study.
+[Castor EDC](https://www.castoredc.com/) allows the import of patient data from subjects included in a research study from the EHR via a FHIR endpoint. This includes both patient data from when the study is under way, but can also amount to large volumes of historic patient data. Currently these are retrieved via batch-bundles, which suffices for single-patient updates, but possibly the bulk import could be used for larger scale data exchanges, for example when importing data for a large retrospective cohort or registry study.
