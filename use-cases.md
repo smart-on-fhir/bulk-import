@@ -19,3 +19,7 @@ A clinical product with its own database synchronizes its data with an EMR. Upda
 ## Import for offline processing
 
 Retrieve a dump of medical data for offline processing, e.g. for measure calculation, de-identification, report generation, AI development, KPI calculation,  …
+
+## Submitting Quality Reporting Data
+
+A hospital system wants to send quality reporting data to a receiving system such as CMS. The hospital system has calculated their quality scores for a measure or set of measures for their covered patients. For each patient, the hosptial system has produced a Bundle containing a MeasureReport resource that identifies the score for the measure, as well as the relevant patient resources used to calculate the measure score.
