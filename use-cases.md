@@ -26,3 +26,7 @@ I have agreements with a large number of research dataset suppliers and they all
 
 ## Seeding test data
 We'd like to use import to allow clients to efficiently seed test data. The import operation would be best-effort, and invalid resources would be skipped in the import process. Imported resources would not be accessible via the REST API until the import operation had completed.
+
+## Submitting Quality Reporting Data
+
+A hospital system wants to send quality reporting data to a receiving system such as CMS. The hospital system has calculated their quality scores for a measure or set of measures for their covered patients. For each patient, the hosptial system has produced a Bundle containing a MeasureReport resource that identifies the score for the measure, as well as the relevant patient resources used to calculate the measure score.
