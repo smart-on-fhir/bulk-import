@@ -29,9 +29,9 @@ Servers may wish to address the following activities as part of an import proces
 
 	Servers SHALL support [Newline Delimited JSON](http://ndjson.org) with a format type of `application/fhir+ndjson` but MAY choose to support additional input formats.
 
-- `inputSource` (url, required)
+- `inputSource` (uri, required)
 
-	FHIR base URL for data source. Used by the importing system when matching references to previously imported data.
+	URI for tracking this set of imported data throughout its lifecycle. MAY be used to specify a FHIR endpoint that can by the importing system when matching references to previously imported data.
 
 - `input` (json array, required), array of objects containing the following fields
 	- `type` (string, required) FHIR resource type
