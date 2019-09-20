@@ -23,3 +23,6 @@ Retrieve a dump of medical data for offline processing, e.g. for measure calcula
 ## Scalability
 
 I have agreements with a large number of research dataset suppliers and they all implement pull capabilities in varying ways. They are all capable of producing FHIR output and saving it into ndjson, and I want to provide a consistent interface that all of them can use to deliver their datasets with minimal overhead for all parties. My data store on the other side of the interface does not support CDS and no other systems are making changes to the data store while the import datasets are being consumed.
+
+## Seeding test data
+We'd like to use import to allow clients to efficiently seed test data. The import operation would be best-effort, and invalid resources would be skipped in the import process. Imported resources would not be accessible via the REST API until the import operation had completed.
