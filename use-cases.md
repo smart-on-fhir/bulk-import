@@ -10,12 +10,16 @@ I have a research dataset containing approximately 500,000,000 resources produce
 
 ## Update a slave server for trial uses
 
-Synchronization of a clinical with a clinical trial server. The clinical trial server can be used to without effecting the source database and will be updated regularly. E.g. with nightly jobs based on an $export with the _since parameter
+Synchronization of a clinical with a clinical trial server. The clinical trial server can be used to without effecting the source database and will be updated regularly. E.g. with nightly jobs based on an $export with the `_since` parameter.
 
 ## Synchronize a product with the EMR
 
-A clinical product with its own database synchronizes its data with an EMR. Updating the EMR with data and updating its internal data with EMR data. 
+A clinical product with its own database synchronizes its data with an EMR. Updating the EMR with data and updating its internal data with EMR data.
 
 ## Import for offline processing
 
-Retrieve a dump of medical data for offline processing, e.g. for measure calculation, de-identification, report generation, AI development, KPI calculation,  …
+Retrieve a dump of medical data for offline processing, e.g. for measure calculation, de-identification, report generation, AI development, KPI calculation, ...
+
+## Scalability
+
+I have agreements with a large number of research dataset suppliers and they all implement pull capabilities in varying ways. They are all capable of producing FHIR output and saving it into ndjson, and I want to provide a consistent interface that all of them can use to deliver their datasets with minimal overhead for all parties. My data store on the other side of the interface does not support CDS and no other systems are making changes to the data store while the import datasets are being consumed.
