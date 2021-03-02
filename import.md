@@ -226,7 +226,7 @@ By default, client-supplied IDs should be preserved when importing resources. If
 	"url": "http://hl7.org/fhir/StructureDefinition/import-source",
 	"valueIdentifier": [{
 		"system": "[inputSource from kick-off request]",
-		"identifier": "[original resource.resourceType]/[original Resource.id]"
+		"value": "[original resource.resourceType]/[original Resource.id]"
 	}]
 }]
 ```
