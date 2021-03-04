@@ -62,11 +62,11 @@ Prefer: respond-async
 ```json
 {
 	"inputFormat": "application/fhir+ndjson",
-	"inputSource": "https://other-server.example.org"
-	"storageDetail": { "type": "https" }
+	"inputSource": "https://other-server.example.org",
+	"storageDetail": { "type": "https" },
 	"input": [{
 		"type": "Patient",
-		"url": "https://client.example.org/patient_file_2.ndjson?sig=RHIX5Xcg0Mq2rqI3OlWT",
+		"url": "https://client.example.org/patient_file_2.ndjson?sig=RHIX5Xcg0Mq2rqI3OlWT"
 	},{
 		"type": "Observations",
 		"url": "https://client.example.org/obseration_file_19.ndjson?sig=RHIX5Xcg0Mq2rqI3OlWT"
