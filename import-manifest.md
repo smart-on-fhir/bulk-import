@@ -1,4 +1,4 @@
-# Proposal for $import Operation
+# Bulk Data Import Proposal (Manifest Approach)
 
 ## Overview
 There are diverse use cases for a bulk-level FHIR data import capability -- including server backup/restore, migration of data between FHIR servers and the aggregation of data from multiple sources to create a combined data set. For some use cases, a single batch import suffices; for others, the ability to bring in incremental data over time is required.
