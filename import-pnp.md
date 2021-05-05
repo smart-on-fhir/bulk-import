@@ -26,7 +26,7 @@ All exchanges described herein between a client and a server SHALL be secured us
 
 With each of the requests described herein, implementers are encouraged to implement OAuth 2.0 access management in accordance with the [SMART Backend Services: Authorization Guide](authorization.html).  Implementations MAY include non-RESTful services that use authorization schemes other than OAuth 2.0, such as mutual-TLS or signed URLs.     
 
-If SMART Backend Services is used to authorize Data Provider to Data Consumer requests (the initial "ping" and subsequent status checks), the Data Provider will need to pre-register with the Data Consumer as a client, supplying its public key and obtaining a `client_id`. It can then use it's private key and the issued `client_id` to obtain a token for use in the API requests described below. If SMART Backend Services is used to authorize Data Consumer to Data Provider requests (the full or abbreviated Bulk Data Export flow), the Data Consumer will need to register with the Data Provider as a client, supplying it's public key and obtaining a `client_id`.  It can then use its private key and the issued `client_id` to obtain a token for use in the API requests involved in requesting and retrieving the data. 
+If SMART Backend Services is used to authorize Data Provider to Data Consumer requests (the initial "ping" and subsequent status checks), the Data Provider will need to pre-register with the Data Consumer as a client, supplying its public key and obtaining a `client_id`. It can then use its private key and the issued `client_id` to obtain a token for use in the API requests described below. If SMART Backend Services is used to authorize Data Consumer to Data Provider requests (the full or abbreviated Bulk Data Export flow), the Data Consumer will need to register with the Data Provider as a client, supplying its public key and obtaining a `client_id`.  It can then use its private key and the issued `client_id` to obtain a token for use in the API requests involved in requesting and retrieving the data. 
 
 ### Request Flow
 
@@ -34,7 +34,7 @@ If SMART Backend Services is used to authorize Data Provider to Data Consumer re
 
 The Data Consumer server SHALL support invocation of this operation using the [FHIR Asynchronous Request Pattern](http://hl7.org/fhir/async.html) via a POST request containing a FHIR [Parameters Resource](https://www.hl7.org/fhir/parameters.html).
 
-In this stage of the flow, the Data Provider is serving as a client to the Data Consumer's Bulk Data Import server. 
+In this stage of the flow, the Data Provider is acting as a client to the Data Consumer's Bulk Data Import server. 
 
 ##### Endpoint
 
@@ -85,15 +85,15 @@ When the kickoff request `exportType` parameter is `static`, the Data Consumer S
 
 This request does not need to be issued immediately following the kickoff request and may be queued by the Data Consumer. However, acceptable timing should be documented and agreed to by the Data Provider and Data Consumer as part of an initial configuration process (e.g., the request will be issued within 24 hours of the kickoff). 
 
-In this stage of the flow, the Data Consumer is serving as a client to the Data Provider's Bulk Data Export server. 
+In this stage of the flow, the Data Consumer is acting as a client to the Data Provider's Bulk Data Export server. 
 
 ---
 
 #### Bulk Data Import Delete Request (Data Provider to Data Consumer)
 
-After a bulk data import has been initiated, a Data Provider MAY send a DELETE request to the URL provided in the `Content-Location` header to cancel the request.  If the request has been completed, a Data Consumer MAY use the request as a signal that a Data Provider is done retrieving any status files provided and that it is safe for the sever to remove those from storage. Following the delete request, when subsequent requests are made to the polling location, the Data Consumer SHALL return a 404 error and an associated FHIR OperationOutcome in JSON format.
+After a bulk data import has been initiated, a Data Provider MAY send a DELETE request to the URL provided in the `Content-Location` header to cancel the request. A Data Consumer MAY use the request as a signal that a Data Provider has retrieved all outputs it intends to retrieve, and that it is safe for the Data Consumer to remove those from storage. Following the delete request, when subsequent requests are made to the polling location, the Data Consumer SHALL return a 404 error and an associated FHIR OperationOutcome in JSON format.
 
-In this stage of the flow, the Data Provider is serving as a client to the Data Consumer's Bulk Data Import server.
+In this stage of the flow, the Data Provider is acting as a client to the Data Consumer's Bulk Data Import server.
 
 ##### Endpoint
 
@@ -118,7 +118,7 @@ Data Providers SHOULD follow an [exponential backoff](https://en.wikipedia.org/w
 
 When requesting status, the Data Providers SHOULD use an `Accept` header indicating a content type of  `application/json`. In the case that errors prevent the import from completing, the Data Consumer SHOULD respond with a FHIR OperationOutcome resource in JSON format.
 
-In this stage of the flow, the Data Provider is serving as a client to the Data Consumer's Bulk Data Import server.
+In this stage of the flow, the Data Provider is acting as a client to the Data Consumer's Bulk Data Import server.
 
 ##### Endpoint
 
@@ -274,9 +274,9 @@ Example response body:
 ```
 
 ---
-#### Output File Request (Data Provider to Data Consumer)
+#### Outcome File Request (Data Provider to Data Consumer)
 
-Using the URLs supplied by the FHIR server in the Complete Status response body's `outcome` field, a client MAY download the generated bulk data files (one or more per resource type) within the time period specified in the `Expires` header (if present). If the `requiresAccessToken` field in the Complete Status body is set to `true`, the request SHALL include a valid access token.  See the Security Considerations section above.  
+Using the URLs supplied by the FHIR server in the Complete Status response body's `outcome` field, a client MAY download any `OperationOutcome` results as bulk data files within the time period specified in the `Expires` header (if present). If the `requiresAccessToken` field in the Complete Status body is set to `true`, the request SHALL include a valid access token.  See the Security Considerations section above.  
 
 
 ##### Endpoint
@@ -293,7 +293,7 @@ Specifies the format of the file being requested.
 
 - HTTP status of `200 OK`
 - `Content-Type` header that matches the file format being delivered.  For files in ndjson format, SHALL be `application/fhir+ndjson`
-- Body of FHIR resources in newline delimited json - [ndjson](http://ndjson.org/) or other requested format
+- Body of FHIR `OperationOutcome` resources in newline delimited json - [ndjson](http://ndjson.org/) or other requested format
 
 ##### Response - Error
 
