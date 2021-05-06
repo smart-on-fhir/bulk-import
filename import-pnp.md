@@ -1,5 +1,10 @@
 # Bulk Data Import Proposal (Ping and Pull Approach)
 
+
+|This IG represents a very early stage, draft proposal for a FHIR Bulk Data Import Operation. Feedback is welcome - feel free to open pull requests and issues in this repository, or to join the discussions in the Bulk Data stream on https://chat.fhir.org and the Bulk Data track at FHIR Connectathon events!| 
+|:-|
+
+
 ### Audience and Scope
 
 This Bulk Import Operation Implementation Guide is intended to address a variety of use cases where an organization needs to share a large FHIR dataset with another organization or move it between systems within an organization on a schedule defined by the data provider. Inter-organizational examples include submitting FHIR data to a disease specific registry, sending information to a public health institution, or transmitting clinical information to a payor for a quality based payment program. Within a single organization, the operation can be used to coordinate ETL tasks, for example, when a client application wishes to instruct a FHIR server to load a new dataset from a local file server or a cloud storage bucket such as AWS S3.
@@ -224,7 +229,7 @@ Required Fields:
       <td><code>requiresAccessToken</code></td>
       <td><span class="label label-success">required</span></td>
       <td>Boolean</td>
-      <td>Indicates whether downloading the generated files requires a bearer access token
+      <td>Indicates whether downloading the generated files requires the same authentication scheme as the import operation itself
       <br/>
       <br/>
       Value SHALL be <code>true</code> if both the file server and the FHIR API server control access using OAuth 2.0 bearer tokens. Value MAY be <code>false</code> for file servers that use access-control schemes other than OAuth 2.0, such as downloads from Amazon S3 bucket URLs or verifiable file servers within an organization's firewall.

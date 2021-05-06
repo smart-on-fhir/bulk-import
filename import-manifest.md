@@ -1,5 +1,8 @@
 # Bulk Data Import Proposal (Manifest Approach)
 
+|This IG represents a very early stage, draft proposal for a FHIR Bulk Data Import Operation.  Feedback is welcome - feel free to open pull requests and issues in this repository, or to join the discussions in the Bulk Data stream on https://chat.fhir.org and the Bulk Data track at FHIR Connectathon events!| 
+|:-|
+
 ## Overview
 There are diverse use cases for a bulk-level FHIR data import capability -- including server backup/restore, migration of data between FHIR servers and the aggregation of data from multiple sources to create a combined data set. For some use cases, a single batch import suffices; for others, the ability to bring in incremental data over time is required.
 
