@@ -17,7 +17,7 @@ Servers may wish to address the following activities as part of an import proces
 
 Additionally, the scope of this document does not include the legal framework for sharing data between partners that may need to be in place, including Business Associate Agreements, Service Level Agreements, and Data Use Agreements. 
 
-This implementation guide complements the [FHIR Bulk Data Export Operation IG](http://build.fhir.org/ig/HL7/bulk-data/export/index.html).
+This implementation guide complements the [FHIR Bulk Data Export Operation IG](http://hl7.org/fhir/uv/bulkdata/export/index.html).
 
 ### Approach
 
