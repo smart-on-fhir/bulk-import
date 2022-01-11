@@ -49,9 +49,9 @@ POST `[fhir base]/$import`
   
 ##### Parameters
 
--  `exportUrl`  (string, required for client to include)
+-  `exportUrl`  (url, required for client to include)
 
-	The FHIR Parameters resource SHALL include an `exportUrl` parameter with a string containing the kickoff endpoint URL for a FHIR Bulk Data Export server (if the `exportType` parameters is `dynamic`) OR the location of a FHIR Bulk Data Export manifest file (if the `export_type` is `static`). The supplied parameters MAY include additional FHIR Bulk Data Export kickoff parameters (such as `_type` or `_since`). When these parameters are provided, the Data Consumer SHALL include them in the subsequent export request.
+	The FHIR Parameters resource SHALL include an `exportUrl` parameter with a url containing the kickoff endpoint for a FHIR Bulk Data Export server (if the `exportType` parameters is `dynamic`) OR the location of a FHIR Bulk Data Export manifest file (if the `export_type` is `static`). The supplied parameters MAY include additional FHIR Bulk Data Export kickoff parameters (such as `_type` or `_since`). When these parameters are provided, the Data Consumer SHALL include them in the subsequent export request.
 
 - `exportType` (code, optional for client to include and if omitted defaults to `dynamic`)
 
