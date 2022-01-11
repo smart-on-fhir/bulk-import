@@ -84,6 +84,24 @@ POST `[fhir base]/$import`
 
 If a server wants to prevent a client from beginning a new import before an in-progress import is completed, it SHOULD respond with a `429 Too Many Requests` status and a Retry-After header, following the rate-limiting advice for "Bulk Data Import Status Request" below.
 
+##### Example Request Body
+
+``` json
+{
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "exportUrl",
+      "valueUrl": "https://bulk-data.smarthealthit.org/fhir/$export"
+    }
+    {
+      "name": "exportType",
+      "valueCode": "dynamic"
+    }
+  ]
+}
+```
+
 #### Data Retrieval Request ("pull" by Data Consumer of Data Provider)
 
 When the kickoff request `exportType` parameter is `dynamic` the Data Consumer SHALL issue a POST request to the `exportUrl` to obtain a dataset from the Data Provider, following the Bulk Data Export flow described in the Bulk Data Access IG. All valid Bulk Data Export kickoff request parameters included in the Bulk Data Import kickoff request SHALL be reflected back in this request. 
