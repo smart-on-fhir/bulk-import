@@ -1,3 +1,5 @@
+# The current draft of a FHIR Bulk Import operation (renamed to Bulk Submit) is at https://hackmd.io/@argonaut/rJoqHZrPle. This document is a very early stage proposal that is no longer being maintained.
+
 # Bulk Data Import Proposal (Manifest Approach)
 
 |This IG represents a very early stage, draft proposal for a FHIR Bulk Data Import Operation.  Feedback is welcome - feel free to open pull requests and issues in this repository, or to join the discussions in the Bulk Data stream on https://chat.fhir.org and the Bulk Data track at FHIR Connectathon events!| 
